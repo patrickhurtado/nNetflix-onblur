@@ -1,2 +1,3 @@
-# netflix-unpreviewer
-Hide Netflix descriptions to avoid spoilers
+# netflix-onblur
+
+Blue Netflix descriptions to avoid spoilers
