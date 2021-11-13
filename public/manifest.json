@@ -1,0 +1,37 @@
+{
+  "name": "Netflix On Blur",
+  "description": "Blur Netflix episodes to prevent spoilers",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "homepage_url": "https://github.com/patrickhurtado/netflix-on-blur",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "48": "netflix-logo.png",
+    "96": "netflix-logo.png"
+  },
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Netflix On Blur",
+    "default_icon": {
+      "48": "netflix-logo.png",
+      "96": "netflix-logo.png"
+    }
+  },
+  "background": {
+    "scripts": ["background-script.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.netflix.com/*"],
+      "css": ["blurEffects.css"],
+      "js": ["blurNetflixEpisodes.js"]
+    }
+  ]
+}
