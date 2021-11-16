@@ -13,6 +13,10 @@
     "@types/node": "^12.20.36",
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
+    "aphrodite": "^2.4.0",
+    "babel-plugin-root-import": "^6.6.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -21,18 +25,12 @@
     "yarn": "^1.22.17"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && cp scripts/* build/",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build && cp scripts/* build/",
     "copy_scripts": "cp scripts/* build/",
     "format": "prettier --check src scripts public --write",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "browserslist": {
     "production": [
@@ -51,6 +49,7 @@
     "@types/store": "^2.0.2",
     "@types/uuid": "^8.3.1",
     "@typescript/lib-dom": "npm:@types/web@0.0.46",
-    "prettier": "2.4.1"
+    "prettier": "2.4.1",
+    "react-app-rewired": "^2.1.8"
   }
 }

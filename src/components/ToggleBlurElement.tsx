@@ -4,7 +4,9 @@ import {
   sendMessageToContentScripts,
   setLocalStorage,
   getLocalStorage,
-} from "../lib/browerUtils";
+} from "@src/lib/browerUtils";
+import Header from "@src/components/Header";
+import { StyleSheet, css } from "aphrodite";
 
 const NETFLIX = "NETFLIX";
 
@@ -55,24 +57,34 @@ export default function ToggleBlurElements() {
 
   const { titles, descriptions, images } = values;
   return (
-    <>
-      <LabeledCheckbox
-        label="Titles"
-        initialValue={titles}
-        onChange={(newValue: boolean) => updateValues({ titles: newValue })}
-      />
-      <LabeledCheckbox
-        label="Descriptions"
-        initialValue={descriptions}
-        onChange={(newValue: boolean) =>
-          updateValues({ descriptions: newValue })
-        }
-      />
-      <LabeledCheckbox
-        label="Images"
-        initialValue={images}
-        onChange={(newValue: boolean) => updateValues({ images: newValue })}
-      />
-    </>
+    <view className={css(styles.component)}>
+      <Header />
+
+      <span>
+        <LabeledCheckbox
+          label="Titles"
+          initialValue={titles}
+          onChange={(newValue: boolean) => updateValues({ titles: newValue })}
+        />
+        <LabeledCheckbox
+          label="Descriptions"
+          initialValue={descriptions}
+          onChange={(newValue: boolean) =>
+            updateValues({ descriptions: newValue })
+          }
+        />
+        <LabeledCheckbox
+          label="Images"
+          initialValue={images}
+          onChange={(newValue: boolean) => updateValues({ images: newValue })}
+        />
+      </span>
+    </view>
   );
 }
+const styles = StyleSheet.create({
+  component: {
+    display: "flex",
+    padding: 2,
+  },
+});

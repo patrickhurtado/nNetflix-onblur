@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -6,7 +7,7 @@
       "es5",
       "es6",
       "dom.iterable",
-      "esnext",
+      "esnext"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -24,5 +25,5 @@
   },
   "include": [
     "src"
-  ],
+  ]
 }
