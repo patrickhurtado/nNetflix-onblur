@@ -5,10 +5,7 @@ import {
   setLocalStorage,
   getLocalStorage,
 } from "@src/lib/browerUtils";
-import Header from "@src/components/Header";
-import { StyleSheet, css } from "aphrodite";
-
-const NETFLIX = "NETFLIX";
+import { StyleSheet, css, StyleSheetStatic } from "aphrodite";
 
 const defaultCheckValues: any = {
   titles: true,
@@ -37,16 +34,16 @@ const LabeledCheckbox = ({ label, onChange, initialValue }: any) => {
   );
 };
 
-export default function ToggleBlurElements() {
+export default function ToggleBlurElements({ website, borderStyle }: { website: string, borderStyle: object }) {
   const [values, setValues] = React.useState(defaultCheckValues);
 
   React.useEffect(() => {
-    const storedValues = getLocalStorage(NETFLIX);
-    setValues(storedValues);
+    const storedValues = getLocalStorage(website);
+    setValues(storedValues || defaultCheckValues);
   }, []);
 
   React.useEffect(() => {
-    setLocalStorage(NETFLIX, values);
+    setLocalStorage(website, values);
   }, [values]);
 
   const updateValues = (updatedvalues: any) => {
@@ -58,9 +55,8 @@ export default function ToggleBlurElements() {
   const { titles, descriptions, images } = values;
   return (
     <view className={css(styles.component)}>
-      <Header />
-
-      <span>
+      <h3 className={css(styles.titleBorder, borderStyle)}>{website}</h3>
+      <span className={css(styles.checkboxRow)}>
         <LabeledCheckbox
           label="Titles"
           initialValue={titles}
@@ -84,7 +80,8 @@ export default function ToggleBlurElements() {
 }
 const styles = StyleSheet.create({
   component: {
-    display: "flex",
     padding: 2,
   },
+  checkboxRow: { display: "flex", flexDirection: "row" },
+  titleBorder: { borderStyle: "solid", borderWidth: 2 },
 });
