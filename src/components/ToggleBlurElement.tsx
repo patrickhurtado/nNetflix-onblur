@@ -49,7 +49,7 @@ export default function ToggleBlurElements({ website, name, borderStyle }: { web
   const updateValues = (updatedvalues: any) => {
     const newValues = { ...values, ...updatedvalues };
     setValues(newValues);
-    sendMessageToContentScripts(newValues);
+    sendMessageToContentScripts(website, newValues);
   };
 
   const { titles, descriptions, images } = values;

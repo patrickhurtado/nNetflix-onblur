@@ -85,10 +85,10 @@ observer.observe(document.body, {
 });
 
 function updateBlurs(message) {
-  if (message) {
+  if (message[WEBSITE_KEY]) {
     const episodes = document.querySelectorAll(`${currentPlatform.episodeContainer}`);
     for (const card of episodes) {
-      setFlags(message);
+      setFlags(message[WEBSITE_KEY]);
       modifyCard(card);
     }
   }

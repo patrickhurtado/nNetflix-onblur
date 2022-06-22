@@ -16,6 +16,7 @@ export const sendMessageToBackground = async (
 };
 
 export const sendMessageToContentScripts = async (
+  key: string,
   message: any,
   callback = () => { }
 ) => {
@@ -26,10 +27,8 @@ export const sendMessageToContentScripts = async (
   //@ts-ignore
   return chrome.tabs
     .query({
-      currentWindow: true,
-      active: true,
       url: ["*://*.netflix.com/*", "*://*.hulu.com/*", "*://*.disneyplus.com/*"],
-    }, (tabs) => sendMessageToTabs(tabs, message));
+    }, (tabs) => sendMessageToTabs(tabs, { [key]: message }));
 };
 
 export const getLocalStorage = (key: any) => {
