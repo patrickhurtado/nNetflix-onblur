@@ -29,9 +29,9 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.netflix.com/*", "*://*.hulu.com/*"],
+      "matches": ["*://*.netflix.com/*", "*://*.hulu.com/*", "*://*.disneyplus.com/*"],
       "css": ["blurEffects.css"],
-      "js": ["constants.js", "blurEpisodes.js"]
+      "js": ["constants.js", "utils.js", "blurEpisodes.js"]
     }
   ]
 }

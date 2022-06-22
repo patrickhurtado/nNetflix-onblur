@@ -34,7 +34,7 @@ const LabeledCheckbox = ({ label, onChange, initialValue }: any) => {
   );
 };
 
-export default function ToggleBlurElements({ website, borderStyle }: { website: string, borderStyle: object }) {
+export default function ToggleBlurElements({ website, name, borderStyle }: { website: string, name: string, borderStyle: object }) {
   const [values, setValues] = React.useState(defaultCheckValues);
 
   React.useEffect(() => {
@@ -55,7 +55,7 @@ export default function ToggleBlurElements({ website, borderStyle }: { website: 
   const { titles, descriptions, images } = values;
   return (
     <view className={css(styles.component)}>
-      <h3 className={css(styles.titleBorder, borderStyle)}>{website}</h3>
+      <h3 className={css(styles.titleBorder, borderStyle)}>{name}</h3>
       <span className={css(styles.checkboxRow)}>
         <LabeledCheckbox
           label="Titles"

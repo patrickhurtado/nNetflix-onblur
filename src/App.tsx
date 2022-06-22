@@ -8,8 +8,9 @@ function App() {
     <Box className={css(styles.component)} component="main">
       <Header />
 
-      <ToggleBlurElements website={"NETFLIX"} borderStyle={styles.netflixBorder} />
-      <ToggleBlurElements website={"HULU"} borderStyle={styles.huluBorder} />
+      <ToggleBlurElements website={"NETFLIX"} name={"Netflix"} borderStyle={styles.netflixBorder} />
+      <ToggleBlurElements website={"HULU"} name={"Hulu"} borderStyle={styles.huluBorder} />
+      <ToggleBlurElements website={"DISNEYPLUS"} name={"Disney+"} borderStyle={styles.disneyplusBorder} />
     </Box>
   );
 }
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
   },
   netflixBorder: { borderColor: "#E50914" },
   huluBorder: { borderColor: "#1CE783" },
+  disneyplusBorder: { borderColor: "#393E8F" },
 });
 
 export default App;

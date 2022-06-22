@@ -10,42 +10,13 @@ const setFlags = (options = { images: true, descriptions: true, titles: true }) 
   isBlurImages = images;
 };
 
-const isWatchedEpisode = (card) => {
-  const currentProgress = currentPlatform.getProgress(card);
-  return currentProgress > 0;
-};
-
-const addClass = (component, cls) => {
-  component?.classList.add(cls);
-};
-
-const removeClass = (component, cls) => {
-  component?.classList.remove(cls);
-};
-
-const blurText = (component) => {
-  addClass(component, "blur-text");
-};
-
-const unblurText = (component) => {
-  removeClass(component, "blur-text");
-};
-
-blurImage = (component) => {
-  addClass(component, "blur-image");
-};
-
-unblurImage = (component) => {
-  removeClass(component, "blur-image");
-};
-
 const updateEpisodeList = (nodes) => {
   for (const node of nodes) {
     if (!node) {
       continue;
     };
 
-    const cardContainer = `.${supportedPlatforms[WEBSITE_KEY].episodeContainerClass}`;
+    const cardContainer = `${supportedPlatforms[WEBSITE_KEY].episodeContainer}`;
 
     const titleCards = node.querySelectorAll(cardContainer);
 
@@ -64,11 +35,9 @@ const updateEpisodeList = (nodes) => {
 
 const modifyCard = (card) => {
 
-  const { titleClass, descriptionClass, imageClass } = supportedPlatforms[WEBSITE_KEY];
-
-  const titleComponent = card.querySelector(`.${titleClass}`);
-  const descriptionComponent = card.querySelector(`.${descriptionClass}`);
-  const imageComponent = card.querySelector(`.${imageClass}`);
+  const titleComponent = currentPlatform.getTitle(card);
+  const descriptionComponent = currentPlatform.getDescription(card);
+  const imageComponent = currentPlatform.getImage(card);
   if (!(titleComponent && descriptionComponent && imageComponent)) {
     return;
   };
@@ -80,11 +49,17 @@ const modifyCard = (card) => {
     return;
   }
 
-  isBlurTitle && titleComponent ? blurText(titleComponent) : unblurText(titleComponent);
+  isBlurTitle && titleComponent
+    ? blurText(titleComponent)
+    : unblurText(titleComponent);
+
   isBlurDescription && descriptionComponent
     ? blurText(descriptionComponent)
     : unblurText(descriptionComponent);
-  isBlurImages && imageComponent ? blurImage(imageComponent) : unblurImage(imageComponent);
+
+  isBlurImages && imageComponent
+    ? blurImage(imageComponent)
+    : unblurImage(imageComponent);
 };
 
 let observer = new MutationObserver((mutations) => {
@@ -109,10 +84,10 @@ observer.observe(document.body, {
   characterData: false,
 });
 
-function updateNetflixBlurs(message) {
+function updateBlurs(message) {
   if (message) {
-    const titleCards = document.querySelectorAll(`.${currentPlatform.episodeContainerClass}`);
-    for (const card of titleCards) {
+    const episodes = document.querySelectorAll(`${currentPlatform.episodeContainer}`);
+    for (const card of episodes) {
       setFlags(message);
       modifyCard(card);
     }
@@ -121,4 +96,4 @@ function updateNetflixBlurs(message) {
 
 chrome.storage.local.get(WEBSITE_KEY, (blurWebsites) => setFlags(blurWebsites[WEBSITE_KEY]));
 
-chrome.runtime.onMessage.addListener(updateNetflixBlurs);
+chrome.runtime.onMessage.addListener(updateBlurs);

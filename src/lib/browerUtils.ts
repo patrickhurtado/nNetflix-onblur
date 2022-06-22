@@ -28,7 +28,7 @@ export const sendMessageToContentScripts = async (
     .query({
       currentWindow: true,
       active: true,
-      url: ["*://*.netflix.com/*", "*://*.hulu.com/*"],
+      url: ["*://*.netflix.com/*", "*://*.hulu.com/*", "*://*.disneyplus.com/*"],
     }, (tabs) => sendMessageToTabs(tabs, message));
 };
 

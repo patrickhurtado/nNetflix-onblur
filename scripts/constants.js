@@ -1,8 +1,8 @@
 var netflixConstants = {
-  episodeContainerClass: "titleCardList--container",
-  imageClass: "titleCard-imageWrapper",
-  titleClass: "titleCard-title_text",
-  descriptionClass: "titleCard-synopsis ",
+  episodeContainer: ".titleCardList--container",
+  getImage: (card) => card.querySelector(`.titleCard-imageWrapper`),
+  getTitle: (card) => card.querySelector(`.titleCard-title_text`),
+  getDescription: (card) => card.querySelector(`.titleCard-synopsis`),
   getProgress: (node) => {
     const progressBar = node.getElementsByTagName("progress")?.[0];
     if (progressBar) {
@@ -14,10 +14,10 @@ var netflixConstants = {
 };
 
 var huluConstants = {
-  episodeContainerClass: "StandardEmphasisHorizontalTile__container",
-  imageClass: "StandardEmphasisHorizontalTileThumbnail__image-container",
-  titleClass: "StandardEmphasisHorizontalTileContent__title",
-  descriptionClass: "StandardEmphasisHorizontalTileContent__description",
+  episodeContainer: ".StandardEmphasisHorizontalTile__container",
+  getImage: (card) => card.querySelector(`.StandardEmphasisHorizontalTileThumbnail__image-container`),
+  getTitle: (card) => card.querySelector(`.StandardEmphasisHorizontalTileContent__title`),
+  getDescription: (card) => card.querySelector(`.StandardEmphasisHorizontalTileContent__description`),
   getProgress: (node) => {
     const progressBar = node.querySelector(".StatusBar__progress");
     if (!progressBar) return 0;
@@ -29,9 +29,27 @@ var huluConstants = {
   }
 }
 
+var disneyplusConstants = {
+  episodeContainer: "a[data-gv2elementkey=contentTile]",
+  getImage: (card) => card.querySelector(`.image-container`),
+  getTitle: (card) => card.querySelector(`b`),
+  getDescription: (card) => card.getElementsByClassName(`metadata text-color--secondary text--left`)?.[0],
+  getProgress: (node) => {
+    const progressBar = node.getElementsByTagName("progress")?.[0];
+    if (progressBar) {
+      const maxValue = parseFloat(progressBar.getAttribute("max") || "1");
+      const currentValue = parseFloat(progressBar.getAttribute("value") || "0");
+
+      return currentValue / maxValue;
+    }
+    return 0;
+  }
+};
+
 var supportedPlatforms = {
   NETFLIX: netflixConstants,
   HULU: huluConstants,
+  DISNEYPLUS: disneyplusConstants,
 }
 
 var getWebsite = () => {
