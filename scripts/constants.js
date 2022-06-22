@@ -1,3 +1,5 @@
+const MINIMUM_PROGRESS = 10;
+
 var netflixConstants = {
   episodeContainer: ".titleCardList--container",
   getImage: (card) => card.querySelector(`.titleCard-imageWrapper`),
@@ -6,8 +8,8 @@ var netflixConstants = {
   getProgress: (node) => {
     const progressBar = node.getElementsByTagName("progress")?.[0];
     if (progressBar) {
-      const value = parseFloat(progressBar.getAttribute("value") || "0");
-      return value;
+      const value = (parseFloat(progressBar.getAttribute("value") || "0"));
+      return value * 100;
     }
     return 0;
   }
@@ -40,7 +42,7 @@ var disneyplusConstants = {
       const maxValue = parseFloat(progressBar.getAttribute("max") || "1");
       const currentValue = parseFloat(progressBar.getAttribute("value") || "0");
 
-      return currentValue / maxValue;
+      return (currentValue / maxValue) * 100;
     }
     return 0;
   }

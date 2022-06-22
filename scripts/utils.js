@@ -24,5 +24,5 @@ var unblurImage = (component) => {
 
 var isWatchedEpisode = (card) => {
   const currentProgress = currentPlatform.getProgress(card);
-  return currentProgress > 0;
+  return currentProgress > MINIMUM_PROGRESS;
 };
