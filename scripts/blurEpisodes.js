@@ -1,9 +1,10 @@
-
 let isBlurTitle = true;
 let isBlurDescription = true;
 let isBlurImages = true;
 
-const setFlags = (options = { images: true, descriptions: true, titles: true }) => {
+const setFlags = (
+  options = { images: true, descriptions: true, titles: true }
+) => {
   const { images, descriptions, titles } = options;
   isBlurTitle = titles;
   isBlurDescription = descriptions;
@@ -14,7 +15,7 @@ const updateEpisodeList = (nodes) => {
   for (const node of nodes) {
     if (!node) {
       continue;
-    };
+    }
 
     const cardContainer = `${supportedPlatforms[WEBSITE_KEY].episodeContainer}`;
 
@@ -29,18 +30,17 @@ const updateEpisodeList = (nodes) => {
     const parentCard = node.closest(cardContainer);
     if (parentCard) {
       modifyCard(parentCard);
-    };
+    }
   }
 };
 
 const modifyCard = (card) => {
-
   const titleComponent = currentPlatform.getTitle(card);
   const descriptionComponent = currentPlatform.getDescription(card);
   const imageComponent = currentPlatform.getImage(card);
   if (!(titleComponent && descriptionComponent && imageComponent)) {
     return;
-  };
+  }
 
   if (isWatchedEpisode(card)) {
     unblurText(titleComponent);
@@ -64,7 +64,6 @@ const modifyCard = (card) => {
 
 let observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
-
     if (!(mutation.addedNodes || mutation.target)) return;
 
     const nodes = [...mutation.addedNodes];
@@ -86,7 +85,9 @@ observer.observe(document.body, {
 
 function updateBlurs(message) {
   if (message[WEBSITE_KEY]) {
-    const episodes = document.querySelectorAll(`${currentPlatform.episodeContainer}`);
+    const episodes = document.querySelectorAll(
+      `${currentPlatform.episodeContainer}`
+    );
     for (const card of episodes) {
       setFlags(message[WEBSITE_KEY]);
       modifyCard(card);
@@ -94,6 +95,8 @@ function updateBlurs(message) {
   }
 }
 
-chrome.storage.local.get(WEBSITE_KEY, (blurWebsites) => setFlags(blurWebsites[WEBSITE_KEY]));
+chrome.storage.local.get(WEBSITE_KEY, (blurWebsites) =>
+  setFlags(blurWebsites[WEBSITE_KEY])
+);
 
 chrome.runtime.onMessage.addListener(updateBlurs);

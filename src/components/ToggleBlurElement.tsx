@@ -34,7 +34,15 @@ const LabeledCheckbox = ({ label, onChange, initialValue }: any) => {
   );
 };
 
-export default function ToggleBlurElements({ website, name, borderStyle }: { website: string, name: string, borderStyle: object }) {
+export default function ToggleBlurElements({
+  website,
+  name,
+  borderStyle,
+}: {
+  website: string;
+  name: string;
+  borderStyle: object;
+}) {
   const [values, setValues] = React.useState(defaultCheckValues);
 
   React.useEffect(() => {

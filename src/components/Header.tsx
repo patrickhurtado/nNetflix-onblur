@@ -5,6 +5,6 @@ export const Header = (_: any) => {
 };
 
 const styles = StyleSheet.create({
-  component: { display: "flex", alignItems: "center" }
+  component: { display: "flex", alignItems: "center" },
 });
 export default Header;

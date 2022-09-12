@@ -8,9 +8,21 @@ function App() {
     <Box className={css(styles.component)} component="main">
       <Header />
 
-      <ToggleBlurElements website={"NETFLIX"} name={"Netflix"} borderStyle={styles.netflixBorder} />
-      <ToggleBlurElements website={"HULU"} name={"Hulu"} borderStyle={styles.huluBorder} />
-      <ToggleBlurElements website={"DISNEYPLUS"} name={"Disney+"} borderStyle={styles.disneyplusBorder} />
+      <ToggleBlurElements
+        website={"NETFLIX"}
+        name={"Netflix"}
+        borderStyle={styles.netflixBorder}
+      />
+      <ToggleBlurElements
+        website={"HULU"}
+        name={"Hulu"}
+        borderStyle={styles.huluBorder}
+      />
+      <ToggleBlurElements
+        website={"DISNEYPLUS"}
+        name={"Disney+"}
+        borderStyle={styles.disneyplusBorder}
+      />
     </Box>
   );
 }

@@ -1,6 +1,6 @@
 {
-  "name": "Netflix On Blur",
-  "description": "Blur Netflix episodes to prevent spoilers",
+  "name": "Stream Spoil Free",
+  "description": "Blur streaming episodes to prevent spoilers",
   "version": "1.0.0",
   "manifest_version": 2,
   "homepage_url": "https://github.com/patrickhurtado/netflix-on-blur",
@@ -13,15 +13,15 @@
     "https://*/*"
   ],
   "icons": {
-    "48": "netflix-logo.png",
-    "96": "netflix-logo.png"
+    "48": "Stream_Spoil_Free.png",
+    "96": "Stream_Spoil_Free.png"
   },
   "browser_action": {
     "default_popup": "index.html",
-    "default_title": "Netflix On Blur",
+    "default_title": "Stream Spoil Free",
     "default_icon": {
-      "48": "netflix-logo.png",
-      "96": "netflix-logo.png"
+      "48": "Stream_Spoil_Free.png",
+      "96": "Stream_Spoil_Free.png"
     }
   },
   "background": {
@@ -29,7 +29,11 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.netflix.com/*", "*://*.hulu.com/*", "*://*.disneyplus.com/*"],
+      "matches": [
+        "*://*.netflix.com/*",
+        "*://*.hulu.com/*",
+        "*://*.disneyplus.com/*"
+      ],
       "css": ["blurEffects.css"],
       "js": ["constants.js", "utils.js", "blurEpisodes.js"]
     }

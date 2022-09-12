@@ -9,7 +9,7 @@ const sendMessageToTabs = (tabs: any, message: any) => {
 
 export const sendMessageToBackground = async (
   message: any,
-  callback = () => { }
+  callback = () => {}
 ) => {
   //@ts-ignore
   const sendMessage = chrome.runtime.sendMessage(message, callback);
@@ -18,17 +18,23 @@ export const sendMessageToBackground = async (
 export const sendMessageToContentScripts = async (
   key: string,
   message: any,
-  callback = () => { }
+  callback = () => {}
 ) => {
   // //@ts-ignore
   // const sendMessage = chrome.tabs.sendMessage(message);
   // return sendMessage.then(callback, console.log);
 
   //@ts-ignore
-  return chrome.tabs
-    .query({
-      url: ["*://*.netflix.com/*", "*://*.hulu.com/*", "*://*.disneyplus.com/*"],
-    }, (tabs) => sendMessageToTabs(tabs, { [key]: message }));
+  return chrome.tabs.query(
+    {
+      url: [
+        "*://*.netflix.com/*",
+        "*://*.hulu.com/*",
+        "*://*.disneyplus.com/*",
+      ],
+    },
+    (tabs) => sendMessageToTabs(tabs, { [key]: message })
+  );
 };
 
 export const getLocalStorage = (key: any) => {
